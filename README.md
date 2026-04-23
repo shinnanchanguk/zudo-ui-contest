@@ -6,9 +6,12 @@ Zudo 학생 앱의 새로운 디자인을 만들어보세요!
 
 ## 🔗 라이브 데모
 
-현재 기본 UI 미리보기: **https://zudo-ui-contest.vercel.app/m**
+- 기본 UI 미리보기: **https://zudo-ui-contest.vercel.app/m**
+- 📚 **제출작 갤러리(선생님·투표자용)**: **https://zudo-ui-contest.vercel.app/gallery**
+  - 모든 PR을 한 페이지에서 카드로 보고, **[체험하기]** 버튼으로 각 디자인을 바로 사용해볼 수 있음
+  - 데이터는 5분마다 자동 갱신 (새 PR이 안 보이면 잠시 후 새로고침)
 
-PR을 올리면 해당 브랜치 전용 preview 링크가 자동 생성됩니다 (Vercel 봇이 PR에 코멘트로 달아줌). 심사는 이 preview 링크로 진행됩니다.
+PR을 올리면 해당 브랜치 전용 preview 링크가 자동 생성됩니다 (Vercel 봇이 PR에 코멘트로 달아줌).
 
 ## 참여 방법
 
