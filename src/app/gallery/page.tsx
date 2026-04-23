@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { fetchSubmissions, type Submission } from './_lib/github'
 
-export const revalidate = 300
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: '제출작 갤러리 — Zudo UI 디자인 공모전',
@@ -68,7 +68,7 @@ export default async function GalleryPage() {
 
       <footer className="border-t border-slate-200 bg-slate-50 mt-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-xs text-slate-500 text-center">
-          데이터는 5분마다 자동 갱신됩니다. 새 PR이 안 보이면 잠시 후 새로고침해 주세요.
+          데이터는 약 1분마다 자동 갱신됩니다. 새 PR이 안 보이면 잠시 후 새로고침해 주세요.
         </div>
       </footer>
     </div>

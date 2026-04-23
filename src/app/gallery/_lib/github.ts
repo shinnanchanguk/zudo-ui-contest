@@ -37,7 +37,7 @@ export async function fetchSubmissions(): Promise<Submission[]> {
   try {
     const res = await fetch(
       `https://api.github.com/repos/${REPO}/issues?state=open&per_page=100`,
-      { headers: GH_HEADERS, next: { revalidate: 300 } }
+      { headers: GH_HEADERS, next: { revalidate: 60 } }
     )
     if (!res.ok) return []
     const data = await res.json()
@@ -54,7 +54,7 @@ export async function fetchSubmissions(): Promise<Submission[]> {
       try {
         const res = await fetch(pr.comments_url, {
           headers: GH_HEADERS,
-          next: { revalidate: 300 },
+          next: { revalidate: 60 },
         })
         if (res.ok) {
           const comments = (await res.json()) as GhComment[]
