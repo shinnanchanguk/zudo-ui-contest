@@ -23,7 +23,7 @@ export default async function GalleryPage() {
   const submissions = await fetchSubmissions()
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
       <header className="border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5">
           <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-indigo-500 font-semibold">

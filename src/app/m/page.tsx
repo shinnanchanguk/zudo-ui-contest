@@ -140,3 +140,5 @@ export default function StudentMobilePage() {
     </div>
   )
 }
+
+// demo design A
