@@ -1,0 +1,1 @@
+export { ExtendedStudyRequestView } from './ExtendedStudyRequestView'
