@@ -2,14 +2,21 @@
 
 import { ChevronLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useTransition } from 'react'
 import { PillsView } from '@/components/mobile/pills'
+import { StudentMobilePageSkeleton } from '@/components/mobile/NavigationSkeletons'
 
 export default function PillsPage() {
   const router = useRouter()
+  const [isPending, startTransition] = useTransition()
 
   const handleBack = () => {
-    router.back()
+    startTransition(() => {
+      router.push('/m')
+    })
   }
+
+  if (isPending) return <StudentMobilePageSkeleton />
 
   return (
     <div className="min-h-dvh bg-white flex flex-col">

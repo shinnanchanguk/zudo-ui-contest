@@ -2,14 +2,21 @@
 
 import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useTransition } from 'react'
 import { ExtendedStudyRequestView } from '@/components/mobile/extended-study/ExtendedStudyRequestView'
+import { StudentMobilePageSkeleton } from '@/components/mobile/NavigationSkeletons'
 
 export default function ExtendedStudyPage() {
   const router = useRouter()
+  const [isPending, startTransition] = useTransition()
 
   const handleBack = () => {
-    router.back()
+    startTransition(() => {
+      router.push('/m')
+    })
   }
+
+  if (isPending) return <StudentMobilePageSkeleton />
 
   return (
     <div className="min-h-dvh bg-white flex flex-col">

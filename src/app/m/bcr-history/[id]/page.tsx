@@ -7,6 +7,8 @@ import { useMemo, useState, useCallback } from 'react'
 import { useMyBcrHistory, useBcrImageUrl, useBcrChecklistItems } from '@/hooks/useBcr'
 import { BCR_STATUS_LABELS, BCR_STATUS_STYLES, isBcrStatusPoor, isBcrStatusNeedsChecklist } from '@/types/bcr'
 import { cn } from '@/lib/utils'
+import { useTransition } from 'react'
+import { BcrHistorySkeleton } from '@/components/mobile/NavigationSkeletons'
 
 function BcrPhotoItem({ path, onClick }: { path: string; onClick: () => void }) {
   const { data: signedUrl, isLoading } = useBcrImageUrl(path)
@@ -145,6 +147,7 @@ function PhotoViewer({
 
 export default function BcrHistoryDetailPage() {
   const router = useRouter()
+  const [isPending, startTransition] = useTransition()
   const params = useParams()
   const id = params.id as string
 
@@ -168,6 +171,14 @@ export default function BcrHistoryDetailPage() {
     setViewerOpen(true)
   }, [])
 
+  const handleBack = () => {
+    startTransition(() => {
+      router.push('/m/bcr-history')
+    })
+  }
+
+  if (isPending) return <BcrHistorySkeleton />
+
   if (isLoading) {
     return (
       <div className="min-h-dvh bg-white flex items-center justify-center">
@@ -183,7 +194,7 @@ export default function BcrHistoryDetailPage() {
         <header className="sticky top-0 z-10 bg-white border-b border-gray-200">
           <div className="flex items-center h-14 px-4">
             <button
-              onClick={() => router.back()}
+              onClick={handleBack}
               className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors -ml-2"
             >
               <ChevronLeft className="w-6 h-6 text-gray-900" />
@@ -210,7 +221,7 @@ export default function BcrHistoryDetailPage() {
       <header className="sticky top-0 z-10 bg-white border-b border-gray-200">
         <div className="flex items-center h-14 px-4">
           <button
-            onClick={() => router.back()}
+            onClick={handleBack}
             className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors -ml-2"
           >
             <ChevronLeft className="w-6 h-6 text-gray-900" />

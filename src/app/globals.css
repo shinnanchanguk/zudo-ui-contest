@@ -263,6 +263,126 @@
   /* Orange 200 */
 }
 
+/* ── Ocean Theme (청록 & 파랑) ──────────────────────────────── */
+.theme-ocean {
+  --background: #F0F9FF;
+  --foreground: #0C4A6E;
+  --card: #FFFFFF;
+  --card-foreground: #0C4A6E;
+  --popover: #FFFFFF;
+  --popover-foreground: #0C4A6E;
+  --primary: #0EA5E9;
+  --primary-foreground: #FFFFFF;
+  --secondary: #E0F2FE;
+  --secondary-foreground: #0C4A6E;
+  --muted: #E0F2FE;
+  --muted-foreground: #0369A1;
+  --accent: #06B6D4;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --border: #BAE6FD;
+  --input: #FFFFFF;
+  --ring: #0EA5E9;
+  --sidebar: #F0F9FF;
+  --sidebar-foreground: #0C4A6E;
+  --sidebar-primary: #0EA5E9;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #E0F2FE;
+  --sidebar-accent-foreground: #0C4A6E;
+  --sidebar-border: #BAE6FD;
+  --sidebar-ring: #0EA5E9;
+}
+
+/* ── Forest Theme (녹색 & 에메랄드) ─────────────────────────── */
+.theme-forest {
+  --background: #F0FDF4;
+  --foreground: #14532D;
+  --card: #FFFFFF;
+  --card-foreground: #14532D;
+  --popover: #FFFFFF;
+  --popover-foreground: #14532D;
+  --primary: #16A34A;
+  --primary-foreground: #FFFFFF;
+  --secondary: #DCFCE7;
+  --secondary-foreground: #14532D;
+  --muted: #DCFCE7;
+  --muted-foreground: #15803D;
+  --accent: #059669;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --border: #BBF7D0;
+  --input: #FFFFFF;
+  --ring: #16A34A;
+  --sidebar: #F0FDF4;
+  --sidebar-foreground: #14532D;
+  --sidebar-primary: #16A34A;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #DCFCE7;
+  --sidebar-accent-foreground: #14532D;
+  --sidebar-border: #BBF7D0;
+  --sidebar-ring: #16A34A;
+}
+
+/* ── Sunset Theme (주황 & 분홍) ─────────────────────────────── */
+.theme-sunset {
+  --background: #FFF7ED;
+  --foreground: #7C2D12;
+  --card: #FFFFFF;
+  --card-foreground: #7C2D12;
+  --popover: #FFFFFF;
+  --popover-foreground: #7C2D12;
+  --primary: #F97316;
+  --primary-foreground: #FFFFFF;
+  --secondary: #FFEDD5;
+  --secondary-foreground: #7C2D12;
+  --muted: #FFEDD5;
+  --muted-foreground: #C2410C;
+  --accent: #EC4899;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --border: #FED7AA;
+  --input: #FFFFFF;
+  --ring: #F97316;
+  --sidebar: #FFF7ED;
+  --sidebar-foreground: #7C2D12;
+  --sidebar-primary: #F97316;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #FFEDD5;
+  --sidebar-accent-foreground: #7C2D12;
+  --sidebar-border: #FED7AA;
+  --sidebar-ring: #F97316;
+}
+
+/* ── Midnight Theme (딥 다크) ───────────────────────────────── */
+.theme-midnight {
+  --background: #09090B;
+  --foreground: #FAFAFA;
+  --card: #18181B;
+  --card-foreground: #FAFAFA;
+  --popover: #18181B;
+  --popover-foreground: #FAFAFA;
+  --primary: #A78BFA;
+  --primary-foreground: #09090B;
+  --secondary: #27272A;
+  --secondary-foreground: #FAFAFA;
+  --muted: #27272A;
+  --muted-foreground: #A1A1AA;
+  --accent: #7C3AED;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --border: #3F3F46;
+  --input: #27272A;
+  --ring: #A78BFA;
+  --sidebar: #09090B;
+  --sidebar-foreground: #FAFAFA;
+  --sidebar-primary: #A78BFA;
+  --sidebar-primary-foreground: #09090B;
+  --sidebar-accent: #18181B;
+  --sidebar-accent-foreground: #FAFAFA;
+  --sidebar-border: #3F3F46;
+  --sidebar-ring: #A78BFA;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

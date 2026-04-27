@@ -97,7 +97,7 @@ export function EntryRequestView({ onClose }: EntryRequestViewProps) {
   if (isLoading) {
     return (
       <div className="h-full flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-[#6866F1] animate-spin" />
+        <Loader2 className="w-8 h-8 text-primary animate-spin" />
       </div>
     )
   }
@@ -139,13 +139,13 @@ export function EntryRequestView({ onClose }: EntryRequestViewProps) {
 
       {/* 월별 현황 표시 */}
       <div className="mb-6">
-        <div className="bg-indigo-50 rounded-2xl p-4">
-          <p className="text-xs text-indigo-600 font-bold mb-2">이번 달 조기입실 현황</p>
+        <div className="bg-primary/10 rounded-2xl p-4">
+          <p className="text-xs text-primary font-bold mb-2">이번 달 조기입실 현황</p>
           <div className="flex items-center gap-3">
             {/* 프로그레스 바 */}
-            <div className="flex-1 h-2 bg-indigo-100 rounded-full overflow-hidden">
+            <div className="flex-1 h-2 bg-primary/20 rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#6866F1] rounded-full transition-all duration-300"
+                className="h-full bg-primary rounded-full transition-all duration-300"
                 style={{ width: `${Math.min(100, (monthlyCount / Math.max(effectiveAutoApprovalLimit || 4, 1)) * 100)}%` }}
               />
             </div>
@@ -199,7 +199,7 @@ export function EntryRequestView({ onClose }: EntryRequestViewProps) {
             <button
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className="w-full bg-[#6866F1] text-white py-4 rounded-xl font-bold shadow-lg shadow-indigo-200 active:scale-95 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-primary text-primary-foreground py-4 rounded-xl font-bold shadow-lg shadow-primary/20 active:scale-95 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
             >
               조기입실 신청
             </button>
@@ -209,7 +209,7 @@ export function EntryRequestView({ onClose }: EntryRequestViewProps) {
         {/* 확인 중 */}
         {step === 'checking' && (
           <>
-            <Loader2 className="w-16 h-16 text-[#6866F1] animate-spin mb-6" />
+            <Loader2 className="w-16 h-16 text-primary animate-spin mb-6" />
             <h3 className="text-lg font-bold mb-2">조기입실 신청 중...</h3>
             <p className="text-gray-500 text-sm">잠시만 기다려주세요.</p>
           </>
