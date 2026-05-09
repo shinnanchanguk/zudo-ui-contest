@@ -383,6 +383,519 @@
   --sidebar-ring: #A78BFA;
 }
 
+/* ── Neon Theme (사이버 네온) ───────────────────────────────── */
+.theme-neon {
+  --background: #060812;
+  --foreground: #ecfeff;
+  --card: rgba(10, 14, 30, 0.82);
+  --card-foreground: #e2e8f0;
+  --popover: rgba(10, 14, 30, 0.9);
+  --popover-foreground: #e2e8f0;
+  --primary: #00e5ff;
+  --primary-foreground: #001118;
+  --secondary: #181c36;
+  --secondary-foreground: #dbeafe;
+  --muted: #12162e;
+  --muted-foreground: #9fb3d9;
+  --accent: #c026ff;
+  --accent-foreground: #faf5ff;
+  --destructive: #ef4444;
+  --border: rgba(88, 112, 255, 0.35);
+  --input: rgba(12, 17, 34, 0.95);
+  --ring: #00e5ff;
+  --sidebar: rgba(8, 11, 24, 0.94);
+  --sidebar-foreground: #e2e8f0;
+  --sidebar-primary: #00e5ff;
+  --sidebar-primary-foreground: #001118;
+  --sidebar-accent: #181c36;
+  --sidebar-accent-foreground: #dbeafe;
+  --sidebar-border: rgba(88, 112, 255, 0.35);
+  --sidebar-ring: #00e5ff;
+  background:
+    radial-gradient(1200px 600px at -10% -20%, rgba(0, 229, 255, 0.2) 0%, transparent 60%),
+    radial-gradient(1000px 500px at 110% -10%, rgba(192, 38, 255, 0.22) 0%, transparent 62%),
+    linear-gradient(165deg, #05070f 0%, #080c1f 50%, #0a0f23 100%);
+}
+
+/* Neon accents for utility-based components */
+.theme-neon .bg-gray-50 {
+  background: transparent !important;
+}
+
+.theme-neon .bg-white,
+.theme-neon .bg-card {
+  background: linear-gradient(160deg, rgba(12, 16, 33, 0.88) 0%, rgba(15, 19, 40, 0.78) 100%) !important;
+  border-color: rgba(112, 145, 255, 0.42) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 229, 255, 0.16),
+    0 0 18px rgba(0, 229, 255, 0.14),
+    0 0 26px rgba(192, 38, 255, 0.12),
+    0 16px 30px -18px rgba(0, 0, 0, 0.8) !important;
+}
+
+.theme-neon .text-gray-900 {
+  color: #ecfeff !important;
+}
+
+.theme-neon .text-gray-500 {
+  color: #a3b8e3 !important;
+}
+
+.theme-neon .border-gray-100,
+.theme-neon .border-gray-200 {
+  border-color: rgba(112, 145, 255, 0.42) !important;
+}
+
+.theme-neon .shadow-sm {
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 229, 255, 0.1),
+    0 0 22px rgba(0, 229, 255, 0.16),
+    0 0 28px rgba(192, 38, 255, 0.12),
+    0 14px 26px -16px rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Neon chips/icons used on the mobile dashboard */
+.theme-neon .bg-indigo-50,
+.theme-neon .bg-pink-50,
+.theme-neon .bg-orange-50,
+.theme-neon .bg-blue-50,
+.theme-neon .bg-green-50 {
+  background: rgba(15, 22, 44, 0.9) !important;
+  border: 1px solid rgba(0, 229, 255, 0.32) !important;
+  box-shadow: 0 0 14px rgba(0, 229, 255, 0.2), 0 0 20px rgba(192, 38, 255, 0.14) !important;
+}
+
+.theme-neon .text-[#6866F1],
+.theme-neon .text-pink-600,
+.theme-neon .text-orange-600,
+.theme-neon .text-blue-600,
+.theme-neon .text-green-600 {
+  color: #00e5ff !important;
+}
+
+.theme-neon .bg-[#6866F1] {
+  background: linear-gradient(135deg, #00e5ff 0%, #c026ff 100%) !important;
+  color: #08101f !important;
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.35), 0 0 26px rgba(192, 38, 255, 0.28) !important;
+}
+
+/* ── Retro Theme (픽셀 레트로) ──────────────────────────────── */
+.theme-retro {
+  --background: #dce8c8;
+  --foreground: #1f3b24;
+  --card: #edf5dd;
+  --card-foreground: #1f3b24;
+  --popover: #edf5dd;
+  --popover-foreground: #1f3b24;
+  --primary: #2b6b3f;
+  --primary-foreground: #f3fae6;
+  --secondary: #c8d9ad;
+  --secondary-foreground: #264b2e;
+  --muted: #d2e1b8;
+  --muted-foreground: #46633f;
+  --accent: #5a7d2b;
+  --accent-foreground: #f3fae6;
+  --destructive: #b4432d;
+  --border: #9ab07f;
+  --input: #f0f7e3;
+  --ring: #2b6b3f;
+  --sidebar: #d6e5bf;
+  --sidebar-foreground: #1f3b24;
+  --sidebar-primary: #2b6b3f;
+  --sidebar-primary-foreground: #f3fae6;
+  --sidebar-accent: #c8d9ad;
+  --sidebar-accent-foreground: #264b2e;
+  --sidebar-border: #9ab07f;
+  --sidebar-ring: #2b6b3f;
+  image-rendering: pixelated;
+  background-image:
+    linear-gradient(rgba(31, 59, 36, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 59, 36, 0.06) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+.theme-retro .bg-gray-50 {
+  background-color: transparent !important;
+}
+
+.theme-retro .bg-white,
+.theme-retro .bg-card {
+  background-color: #edf5dd !important;
+  border: 2px solid #587041 !important;
+  border-color: #587041 !important;
+  border-radius: 0 !important;
+  box-shadow: 4px 4px 0 #90a777 !important;
+}
+
+.theme-retro .border-gray-100,
+.theme-retro .border-gray-200 {
+  border-color: #587041 !important;
+}
+
+.theme-retro .text-gray-900 {
+  color: #1f3b24 !important;
+}
+
+.theme-retro .text-gray-500 {
+  color: #4a6842 !important;
+}
+
+.theme-retro .shadow-sm {
+  box-shadow: 3px 3px 0 #90a777 !important;
+}
+
+/* Force sharp retro corners on common rounded components */
+.theme-retro .rounded-xl,
+.theme-retro .rounded-2xl,
+.theme-retro .rounded-3xl,
+.theme-retro .rounded-full {
+  border-radius: 0 !important;
+}
+
+/* Pixel-style dashboard buttons */
+.theme-retro .grid button {
+  border: 2px solid #587041 !important;
+  box-shadow: 4px 4px 0 #90a777 !important;
+  transform: translate(0, 0);
+  transition: transform 80ms steps(2, end), box-shadow 80ms steps(2, end);
+}
+
+.theme-retro .grid button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 #90a777 !important;
+}
+
+.theme-retro .grid button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #90a777 !important;
+}
+
+/* Pixel icon chips */
+.theme-retro .bg-indigo-50,
+.theme-retro .bg-pink-50,
+.theme-retro .bg-orange-50,
+.theme-retro .bg-blue-50,
+.theme-retro .bg-green-50,
+.theme-retro .bg-[#6866F1] {
+  background: #c8d9ad !important;
+  border: 2px solid #587041 !important;
+  box-shadow: 2px 2px 0 #90a777 !important;
+}
+
+.theme-retro .text-[#6866F1],
+.theme-retro .text-pink-600,
+.theme-retro .text-orange-600,
+.theme-retro .text-blue-600,
+.theme-retro .text-green-600 {
+  color: #2b6b3f !important;
+}
+
+/* ── Jelly Theme (젤리 소다) ─────────────────────────────────── */
+.theme-jelly {
+  --background: #fff7fb;
+  --foreground: #6b2944;
+  --card: rgba(255, 255, 255, 0.78);
+  --card-foreground: #6b2944;
+  --popover: rgba(255, 255, 255, 0.88);
+  --popover-foreground: #6b2944;
+  --primary: #fb7185;
+  --primary-foreground: #ffffff;
+  --secondary: #ffe4ef;
+  --secondary-foreground: #8f2f56;
+  --muted: #ffeef6;
+  --muted-foreground: #a35678;
+  --accent: #38bdf8;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: #ffd3e5;
+  --input: #fff9fc;
+  --ring: #fb7185;
+  --sidebar: #fff1f8;
+  --sidebar-foreground: #6b2944;
+  --sidebar-primary: #fb7185;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffe4ef;
+  --sidebar-accent-foreground: #8f2f56;
+  --sidebar-border: #ffd3e5;
+  --sidebar-ring: #fb7185;
+  background: linear-gradient(180deg, #fff9fd 0%, #fff3fa 100%);
+}
+
+.theme-jelly .bg-gray-50 {
+  background: transparent !important;
+}
+
+.theme-jelly .bg-white,
+.theme-jelly .bg-card {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid rgba(255, 211, 229, 0.95) !important;
+  border-radius: 1.5rem !important;
+  backdrop-filter: blur(12px) saturate(110%);
+  -webkit-backdrop-filter: blur(12px) saturate(110%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 12px 22px -14px rgba(251, 113, 133, 0.45) !important;
+  animation: jelly-border-morph 4.4s cubic-bezier(.32,.08,.28,1.12) infinite;
+  transform-origin: center center;
+}
+
+.theme-jelly .bg-white:nth-of-type(2n),
+.theme-jelly .bg-card:nth-of-type(2n) {
+  animation-duration: 5.1s;
+  animation-delay: -1.8s;
+}
+
+.theme-jelly .bg-white:nth-of-type(3n),
+.theme-jelly .bg-card:nth-of-type(3n) {
+  animation-duration: 3.8s;
+  animation-delay: -2.4s;
+}
+
+.theme-jelly .rounded-xl,
+.theme-jelly .rounded-2xl,
+.theme-jelly .rounded-3xl,
+.theme-jelly .rounded-full {
+  border-radius: 1.4rem !important;
+}
+
+.theme-jelly .border-gray-100,
+.theme-jelly .border-gray-200 {
+  border-color: rgba(255, 211, 229, 0.95) !important;
+}
+
+.theme-jelly .text-gray-900 {
+  color: #6b2944 !important;
+}
+
+.theme-jelly .text-gray-500 {
+  color: #a35678 !important;
+}
+
+.theme-jelly .shadow-sm {
+  box-shadow:
+    0 10px 20px -14px rgba(251, 113, 133, 0.4),
+    0 4px 10px -10px rgba(56, 189, 248, 0.4) !important;
+}
+
+.theme-jelly .grid button {
+  transition: transform 180ms cubic-bezier(.22,1.2,.36,1), box-shadow 220ms ease;
+  animation: jelly-button-morph 1.9s cubic-bezier(.28,.06,.26,1.2) infinite;
+  border: 2px solid rgba(251, 113, 133, 0.55) !important;
+  outline: 1px solid rgba(255, 255, 255, 0.75);
+  outline-offset: -2px;
+}
+
+.theme-jelly .grid button:nth-child(2n) {
+  animation-duration: 2.3s;
+  animation-delay: -0.6s;
+}
+
+.theme-jelly .grid button:nth-child(3n) {
+  animation-duration: 1.6s;
+  animation-delay: -1.1s;
+}
+
+.theme-jelly .grid button:hover {
+  transform: translateY(-4px) scale(1.12, 0.86);
+  animation: jelly-hover-squish 820ms cubic-bezier(.16,.95,.23,1.25) both;
+}
+
+.theme-jelly .grid button:active {
+  transform: translateY(2px) scale(0.78, 1.26);
+  animation: jelly-press-squish 360ms cubic-bezier(.08,.78,.25,1.28) both;
+}
+
+.theme-jelly .bg-indigo-50,
+.theme-jelly .bg-pink-50,
+.theme-jelly .bg-orange-50,
+.theme-jelly .bg-blue-50,
+.theme-jelly .bg-green-50 {
+  background: linear-gradient(135deg, rgba(251, 113, 133, 0.2) 0%, rgba(56, 189, 248, 0.2) 100%) !important;
+  border: 1px solid rgba(255, 211, 229, 0.95) !important;
+}
+
+.theme-jelly .bg-[#6866F1] {
+  background: linear-gradient(135deg, #fb7185 0%, #38bdf8 100%) !important;
+  box-shadow: 0 10px 20px -12px rgba(251, 113, 133, 0.55) !important;
+}
+
+.theme-jelly .text-[#6866F1],
+.theme-jelly .text-pink-600,
+.theme-jelly .text-orange-600,
+.theme-jelly .text-blue-600,
+.theme-jelly .text-green-600 {
+  color: #e11d48 !important;
+}
+
+@keyframes jelly-border-morph {
+  0%, 100% {
+    border-radius: 1.5rem;
+    border-color: rgba(251, 113, 133, 0.42);
+  }
+  18% {
+    border-radius: 2.6rem 1rem 2.1rem 0.9rem;
+    border-color: rgba(56, 189, 248, 0.48);
+  }
+  41% {
+    border-radius: 0.95rem 2.6rem 0.9rem 2.7rem;
+    border-color: rgba(251, 113, 133, 0.56);
+  }
+  67% {
+    border-radius: 2.35rem 0.95rem 2.55rem 1rem;
+    border-color: rgba(56, 189, 248, 0.45);
+  }
+  84% {
+    border-radius: 1.05rem 2.35rem 1rem 2.5rem;
+    border-color: rgba(251, 113, 133, 0.5);
+  }
+}
+
+@keyframes jelly-button-morph {
+  0%, 100% {
+    border-radius: 1.5rem;
+    border-color: rgba(251, 113, 133, 0.55);
+    transform: scale(1, 1);
+  }
+  30% {
+    border-radius: 2.4rem 1rem 2.3rem 0.9rem;
+    border-color: rgba(56, 189, 248, 0.6);
+    transform: scale(1.12, 0.82);
+  }
+  60% {
+    border-radius: 0.9rem 2.5rem 1rem 2.55rem;
+    border-color: rgba(251, 113, 133, 0.66);
+    transform: scale(0.84, 1.2);
+  }
+  82% {
+    border-radius: 2.2rem 1.05rem 2.35rem 1rem;
+    border-color: rgba(56, 189, 248, 0.58);
+    transform: scale(1.08, 0.88);
+  }
+}
+
+@keyframes jelly-hover-squish {
+  0% { transform: translateY(-2px) scale(1, 1); }
+  22% { transform: translateY(-6px) scale(1.2, 0.75); }
+  48% { transform: translateY(-1px) scale(0.82, 1.25); }
+  72% { transform: translateY(-5px) scale(1.14, 0.86); }
+  100% { transform: translateY(-4px) scale(1.1, 0.88); }
+}
+
+@keyframes jelly-press-squish {
+  0% { transform: translateY(1px) scale(1, 1); }
+  35% { transform: translateY(3px) scale(0.68, 1.38); }
+  70% { transform: translateY(0) scale(1.08, 0.86); }
+  100% { transform: translateY(2px) scale(0.78, 1.26); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-jelly .bg-white,
+  .theme-jelly .bg-card,
+  .theme-jelly .grid button {
+    animation: none !important;
+  }
+}
+
+/* ── Aurora Theme (오로라 글래스) ───────────────────────────── */
+.theme-aurora {
+  --background: #eef2ff;
+  --foreground: #1f1b4d;
+  --card: rgba(255, 255, 255, 0.55);
+  --card-foreground: #1f1b4d;
+  --popover: rgba(255, 255, 255, 0.68);
+  --popover-foreground: #1e1b4b;
+  --primary: #7c87ff;
+  --primary-foreground: #ffffff;
+  --secondary: rgba(224, 231, 255, 0.6);
+  --secondary-foreground: #312e81;
+  --muted: rgba(248, 250, 255, 0.55);
+  --muted-foreground: #5b6b82;
+  --accent: #ff73c7;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: rgba(255, 255, 255, 0.45);
+  --input: rgba(255, 255, 255, 0.48);
+  --ring: #8b93ff;
+  --sidebar: rgba(243, 246, 255, 0.72);
+  --sidebar-foreground: #1e1b4b;
+  --sidebar-primary: #7c87ff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgba(224, 231, 255, 0.6);
+  --sidebar-accent-foreground: #312e81;
+  --sidebar-border: rgba(255, 255, 255, 0.45);
+  --sidebar-ring: #8b93ff;
+  --radius: 1.25rem;
+  background-color: #eef2ff !important;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(124, 135, 255, 0.28) 0%, transparent 44%),
+    radial-gradient(circle at 88% 12%, rgba(255, 115, 199, 0.25) 0%, transparent 45%),
+    radial-gradient(circle at 52% 44%, rgba(103, 232, 249, 0.2) 0%, transparent 52%),
+    radial-gradient(circle at 22% 90%, rgba(196, 181, 253, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 88%, rgba(129, 140, 248, 0.22) 0%, transparent 48%);
+  background-repeat: no-repeat;
+  background-size: 170% 170%;
+  background-attachment: fixed;
+}
+
+/* Glassmorphism Refinement - Only target major cards/buttons to prevent stacking */
+.theme-aurora .bg-white.rounded-2xl,
+.theme-aurora .bg-card.rounded-2xl {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(26px) saturate(190%) contrast(108%) !important;
+  -webkit-backdrop-filter: blur(26px) saturate(190%) contrast(108%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.65) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    0 16px 36px -14px rgba(82, 95, 181, 0.42) !important;
+}
+
+/* Prevent nested glass elements from stacking filters */
+.theme-aurora .bg-white.rounded-2xl .bg-white,
+.theme-aurora .bg-white.rounded-2xl .bg-primary\/10 {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  border: none !important;
+}
+
+/* Utility overrides for pages using fixed Tailwind colors */
+.theme-aurora .bg-gray-50 {
+  background-color: transparent !important;
+}
+
+.theme-aurora .bg-white {
+  background-color: rgba(255, 255, 255, 0.28) !important;
+  backdrop-filter: blur(24px) saturate(185%) contrast(106%);
+  -webkit-backdrop-filter: blur(24px) saturate(185%) contrast(106%);
+  border-color: rgba(255, 255, 255, 0.56) !important;
+}
+
+.theme-aurora .border-gray-100,
+.theme-aurora .border-gray-200 {
+  border-color: rgba(255, 255, 255, 0.45) !important;
+}
+
+.theme-aurora .shadow-sm {
+  box-shadow: 0 10px 24px -12px rgba(82, 95, 181, 0.45) !important;
+}
+
+.theme-aurora .text-gray-900 {
+  color: #1b1f52 !important;
+}
+
+.theme-aurora .text-gray-500 {
+  color: #5d6687 !important;
+}
+
+/* Ensure Logo and other primary blocks remain solid */
+.theme-aurora .bg-primary:not(button) {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

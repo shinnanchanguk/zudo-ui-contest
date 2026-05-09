@@ -1,12 +1,18 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Settings, Check, X } from 'lucide-react'
 import { useTheme, THEMES, type ThemeId } from '@/lib/theme'
 
 export function ThemeSheet({ variant = 'default' }: { variant?: 'default' | 'minimal' }) {
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <>
@@ -23,24 +29,22 @@ export function ThemeSheet({ variant = 'default' }: { variant?: 'default' | 'min
         <Settings className={`w-5 h-5 ${variant === 'minimal' ? 'text-gray-400' : 'text-gray-600'}`} />
       </button>
 
-      {/* 딤 오버레이 */}
-      {open && (
-        <div
-          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[2px]"
-          onClick={() => setOpen(false)}
-        />
-      )}
+      {/* 딤 오버레이 + 바텀 시트 (portal to body for stable viewport positioning) */}
+      {mounted && open && createPortal(
+        <>
+          <div
+            className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[2px]"
+            onClick={() => setOpen(false)}
+          />
 
-      {/* 바텀 시트 */}
-      <div
-        className={`
-          fixed bottom-0 left-0 right-0 z-50
-          bg-[var(--card)] rounded-t-3xl shadow-2xl
-          transition-transform duration-300 ease-out
-          max-w-md mx-auto
-          ${open ? 'translate-y-0' : 'translate-y-full'}
-        `}
-      >
+          <div className="fixed inset-x-0 bottom-0 z-50 flex justify-center">
+            <div
+              className="
+                w-full max-w-md max-h-[80dvh] overflow-hidden
+                bg-[var(--card)] rounded-t-3xl shadow-2xl
+                transition-transform duration-300 ease-out translate-y-0
+              "
+            >
         {/* 드래그 핸들 */}
         <div className="flex justify-center pt-3 pb-1">
           <div className="w-10 h-1 rounded-full bg-[var(--border)]" />
@@ -58,15 +62,17 @@ export function ThemeSheet({ variant = 'default' }: { variant?: 'default' | 'min
         </div>
 
         {/* 테마 목록 */}
-        <div className="px-5 pb-safe pb-6 space-y-2">
+        <div className="px-5 pb-safe pb-6 space-y-2 overflow-y-auto max-h-[calc(80dvh-72px)] overscroll-contain">
           {THEMES.map((t) => {
             const isActive = theme === t.id
             return (
               <button
                 key={t.id}
                 onClick={() => {
+                  // Close the sheet immediately to avoid transition timing issues
+                  // when a heavy theme (e.g. aurora) changes many CSS variables.
+                  setOpen(false)
                   setTheme(t.id as ThemeId)
-                  setTimeout(() => setOpen(false), 180)
                 }}
                 className={`
                   w-full flex items-center gap-4 p-3.5 rounded-2xl transition-all
@@ -105,7 +111,10 @@ export function ThemeSheet({ variant = 'default' }: { variant?: 'default' | 'min
             )
           })}
         </div>
-      </div>
+            </div>
+          </div>
+        </>
+      , document.body)}
     </>
   )
 }

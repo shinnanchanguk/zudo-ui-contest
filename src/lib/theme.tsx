@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 
-export type ThemeId = 'default' | 'dark' | 'ocean' | 'forest' | 'sunset' | 'midnight'
+export type ThemeId = 'default' | 'dark' | 'ocean' | 'forest' | 'sunset' | 'midnight' | 'aurora' | 'neon' | 'retro' | 'jelly'
 
 export interface ThemeMeta {
   id: ThemeId
@@ -56,6 +56,34 @@ export const THEMES: ThemeMeta[] = [
     description: '모던하고 세련된 딥 퍼플 다크',
     swatches: ['#A78BFA', '#09090B', '#7C3AED'],
     bodyClass: 'theme-midnight',
+  },
+  {
+    id: 'aurora',
+    name: '오로라 글래스',
+    description: '움직이는 빛과 유광 글래스 효과',
+    swatches: ['#818CF8', '#F3F4F6', '#F472B6'],
+    bodyClass: 'theme-aurora',
+  },
+  {
+    id: 'neon',
+    name: '네온 나이트',
+    description: '사이버 감성의 네온 퍼플 다크 테마',
+    swatches: ['#22D3EE', '#0A0A14', '#A855F7'],
+    bodyClass: 'theme-neon',
+  },
+  {
+    id: 'retro',
+    name: '픽셀 레트로',
+    description: '게임보이 감성의 빈티지 그린 테마',
+    swatches: ['#2B6B3F', '#DCE8C8', '#5A7D2B'],
+    bodyClass: 'theme-retro',
+  },
+  {
+    id: 'jelly',
+    name: '젤리 소다',
+    description: '몰캉몰캉 흐물흐물한 젤리 UI 테마',
+    swatches: ['#FB7185', '#FFF7FB', '#38BDF8'],
+    bodyClass: 'theme-jelly',
   },
 ]
 
