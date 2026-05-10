@@ -7,6 +7,8 @@ import { ChevronLeft, Calendar, Clock, FileText, Check, AlertCircle, Loader2, Mo
 import { useStudentOvernight, STUDENT_OVERNIGHT_CATEGORIES } from '@/hooks/useStudentOvernight'
 import { getCategoryStyle, type OvernightCategory } from '@/components/shared/overnight-types'
 import { getTodayKst, addKstDays } from '@/lib/kst'
+import { useTransition } from 'react'
+import { StudentMobilePageSkeleton } from '@/components/mobile/NavigationSkeletons'
 
 // 날짜 형식 변환 함수
 function formatDateForDisplay(dateString: string): string {
@@ -30,6 +32,7 @@ function getTomorrowString(): string {
 
 export default function OvernightPage() {
     const router = useRouter()
+    const [isPending, startTransition] = useTransition()
     const {
         overnightRequests,
         isLoading,
@@ -75,6 +78,14 @@ export default function OvernightPage() {
         }
     }
 
+    const handleBack = () => {
+        startTransition(() => {
+            router.push('/m')
+        })
+    }
+
+    if (isPending) return <StudentMobilePageSkeleton />
+
     return (
         <div className="min-h-dvh bg-white flex flex-col">
             {/* 상태바 공간 */}
@@ -84,7 +95,7 @@ export default function OvernightPage() {
             <header className="sticky top-0 z-10 bg-white border-b border-gray-200">
                 <div className="flex items-center h-14 px-4">
                     <button
-                        onClick={() => router.back()}
+                        onClick={handleBack}
                         className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors -ml-2"
                     >
                         <ChevronLeft className="w-6 h-6 text-gray-900" />

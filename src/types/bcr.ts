@@ -35,7 +35,7 @@ export const BCR_STATUS_LABELS: Record<string, string> = {
 }
 
 export const BCR_STATUS_STYLES: Record<string, { bg: string; text: string }> = {
-  excellent: { bg: 'bg-green-100', text: 'text-green-700' },
+  excellent: { bg: 'bg-primary/20', text: 'text-primary' },
   normal: { bg: 'bg-gray-100', text: 'text-gray-700' },
   poor: { bg: 'bg-orange-100', text: 'text-orange-700' },
   very_poor: { bg: 'bg-red-100', text: 'text-red-700' },

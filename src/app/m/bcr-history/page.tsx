@@ -5,14 +5,24 @@ import { ChevronLeft, ChevronRight, Image as ImageIcon, Pill } from 'lucide-reac
 import { useRouter } from 'next/navigation'
 import { useMyBcrHistory } from '@/hooks/useBcr'
 import { BCR_STATUS_LABELS, BCR_STATUS_STYLES, BCR_STATUS_PILL_MAP } from '@/types/bcr'
-import { useMemo } from 'react'
+import { useMemo, useTransition } from 'react'
+import { StudentMobilePageSkeleton } from '@/components/mobile/NavigationSkeletons'
 import { cn } from '@/lib/utils'
 
 export default function StudentBcrHistoryPage() {
   const router = useRouter()
+  const [isPending, startTransition] = useTransition()
   const { data, isLoading } = useMyBcrHistory()
 
   const items = useMemo(() => data ?? [], [data])
+
+  const handleBack = () => {
+    startTransition(() => {
+      router.push('/m')
+    })
+  }
+
+  if (isPending) return <StudentMobilePageSkeleton />
 
   return (
     <div className="min-h-dvh bg-white flex flex-col">
@@ -21,7 +31,7 @@ export default function StudentBcrHistoryPage() {
       <header className="sticky top-0 z-10 bg-white border-b border-gray-200">
         <div className="flex items-center h-14 px-4">
           <button
-            onClick={() => router.back()}
+            onClick={handleBack}
             className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors -ml-2"
           >
             <ChevronLeft className="w-6 h-6 text-gray-900" />

@@ -37,6 +37,8 @@ import {
   SAFETY_REPORT_STATUS_COLORS,
   type SafetyReportCategory,
 } from '@/types/safety-report'
+import { useTransition } from 'react'
+import { StudentMobilePageSkeleton } from '@/components/mobile/NavigationSkeletons'
 
 // Category options with icons
 const CATEGORY_OPTIONS: {
@@ -55,6 +57,7 @@ const CATEGORY_OPTIONS: {
 
 export default function SafetyReportPage() {
   const router = useRouter()
+  const [isPending, startTransition] = useTransition()
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Form state
@@ -168,6 +171,14 @@ export default function SafetyReportPage() {
     }
   }
 
+  const handleBack = () => {
+    startTransition(() => {
+      router.push('/m')
+    })
+  }
+
+  if (isPending) return <StudentMobilePageSkeleton />
+
   return (
     <div className="min-h-dvh bg-white flex flex-col">
       <div className="h-safe-top shrink-0" />
@@ -176,7 +187,7 @@ export default function SafetyReportPage() {
       <header className="sticky top-0 z-10 bg-white border-b border-gray-200">
         <div className="flex items-center h-14 px-4">
           <button
-            onClick={() => router.back()}
+            onClick={handleBack}
             className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors -ml-2"
           >
             <ChevronLeft className="w-6 h-6 text-gray-900" />

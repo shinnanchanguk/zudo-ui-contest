@@ -1,12 +1,14 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { LogIn, Moon, MessageSquare, LogOut, QrCode, BookOpen, Shield, Pill } from 'lucide-react'
+import { useState, useTransition } from 'react'
+import { LogOut, QrCode, Clock, Moon, Shield, Sparkles, MessageSquare, Pill, BookOpen, LogIn } from 'lucide-react'
 import { useProfile, useSignOut } from '@/hooks/useAuth'
 import { ZudoLogo } from '@/components/logo/ZudoLogo'
-import { Sparkles } from 'lucide-react'
 import { EnrollmentBanner } from '@/components/mobile/afterschool/EnrollmentBanner'
 import { LateNotificationPopup } from '@/components/mobile/LateNotificationPopup'
+import { ThemeSheet } from '@/components/mobile/ThemeSheet'
+import { getSkeletonForHref } from '@/components/mobile/NavigationSkeletons'
 
 const FEATURE_CARDS = [
   {
@@ -61,13 +63,22 @@ const FEATURE_CARDS = [
 
 export default function StudentMobilePage() {
   const router = useRouter()
+  const [isPending, startTransition] = useTransition()
+  const [pendingHref, setPendingHref] = useState<string | null>(null)
   const { data: profile } = useProfile()
   const signOut = useSignOut()
 
   const studentName = profile?.full_name || '학생'
 
   const handleNavigate = (href: string) => {
-    router.push(href)
+    setPendingHref(href)
+    startTransition(() => {
+      router.push(href)
+    })
+  }
+
+  if (isPending && pendingHref) {
+    return getSkeletonForHref(pendingHref)
   }
 
   const handleLogout = () => {
@@ -82,19 +93,31 @@ export default function StudentMobilePage() {
       {/* 스크롤 가능한 메인 영역 */}
       <div className="flex-1 overflow-y-auto">
         <div className="p-4 flex flex-col gap-3">
-          {/* 로고 - 갭 축소 */}
-          <div className="mb-4">
+          {/* 상단 로고 */}
+          <div className="mb-2">
             <ZudoLogo size="mobile" rounded="top" />
           </div>
 
-          {/* 인사말 - 갭 축소 */}
-          <div className="mb-4 text-center">
-            <h1 className="text-2xl font-bold text-gray-900">
-              안녕하세요, {studentName}님
-            </h1>
-            <p className="text-base text-gray-500 mt-1">
-              기숙사 관리 시스템 ZUDO입니다
-            </p>
+          {/* 프로필 및 설정 카드 */}
+          <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <span className="text-xl font-bold text-primary">
+                    {studentName.charAt(0)}
+                  </span>
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-gray-900">
+                    {studentName}님
+                  </h1>
+                  <p className="text-sm text-gray-500">
+                    기숙사 관리 시스템 ZUDO
+                  </p>
+                </div>
+              </div>
+              <ThemeSheet variant="minimal" />
+            </div>
           </div>
 
           {/* 방과후 수강신청 배너 (신청 기간 중에만 표시) */}

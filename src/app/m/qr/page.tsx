@@ -13,9 +13,12 @@ import { useProfile } from '@/hooks/useAuth'
 import { useStudentQrCode, useGenerateQrCode } from '@/hooks/useQR'
 import { StudentQrCode } from '@/components/qr/StudentQrCode'
 import { createClient } from '@/lib/supabase/client'
+import { useTransition } from 'react'
+import { StudentMobilePageSkeleton } from '@/components/mobile/NavigationSkeletons'
 
 export default function QrPage() {
   const router = useRouter()
+  const [isPending, startTransition] = useTransition()
   const { data: profile, isLoading: profileLoading } = useProfile()
   const studentId = profile?.student_id
 
@@ -90,8 +93,12 @@ export default function QrPage() {
   }, [studentId, codeLoading, qrCode, generateQrCode.isPending])
 
   const handleBack = () => {
-    router.back()
+    startTransition(() => {
+      router.push('/m')
+    })
   }
+
+  if (isPending) return <StudentMobilePageSkeleton />
 
   const handleRefresh = () => {
     if (studentId) {

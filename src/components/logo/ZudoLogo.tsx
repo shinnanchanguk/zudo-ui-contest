@@ -60,7 +60,7 @@ export function ZudoLogo({ size = 'md', className, rounded = 'top' }: ZudoLogoPr
   return (
     <div
       className={cn(
-        'flex items-center justify-center bg-[#6866F1] overflow-hidden',
+        'flex items-center justify-center bg-primary overflow-hidden',
         config.container,
         roundedClass,
         className
