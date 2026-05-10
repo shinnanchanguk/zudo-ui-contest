@@ -59,11 +59,15 @@ export async function fetchSubmissions(): Promise<Submission[]> {
         if (res.ok) {
           const comments = (await res.json()) as GhComment[]
           if (Array.isArray(comments)) {
-            const vercelComment = comments.find(
-              (c) => c?.user?.login === 'vercel[bot]'
-            )
-            const match = vercelComment?.body?.match(PREVIEW_URL_PATTERN)
-            previewUrl = match?.[0] ?? null
+            for (let i = comments.length - 1; i >= 0; i--) {
+              const c = comments[i]
+              if (c?.user?.login !== 'vercel[bot]') continue
+              const m = c.body?.match(PREVIEW_URL_PATTERN)
+              if (m) {
+                previewUrl = m[0]
+                break
+              }
+            }
           }
         }
       } catch {
