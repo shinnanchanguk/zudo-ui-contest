@@ -1,174 +1,200 @@
-// @ts-nocheck
 'use client'
 
-// 학생 QR 스캔 모바일 페이지
-// Student QR Scan Mobile Page
-
-import { useEffect, useState, useCallback, useRef } from 'react'
-import { ArrowLeft, RefreshCw, Download } from 'lucide-react'
+import { useState, useCallback } from 'react'
+import { ArrowLeft, Download } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useQuery } from '@tanstack/react-query'
-import { toast } from 'sonner'
 import { useProfile } from '@/hooks/useAuth'
 import { useStudentQrCode, useGenerateQrCode } from '@/hooks/useQR'
 import { StudentQrCode } from '@/components/qr/StudentQrCode'
-import { createClient } from '@/lib/supabase/client'
+import { motion, AnimatePresence } from 'framer-motion'
+import { mockStudentInfo } from '@/lib/mock-data'
 
 export default function QrPage() {
   const router = useRouter()
   const { data: profile, isLoading: profileLoading } = useProfile()
-  const studentId = profile?.student_id
+  const studentId = profile?.id
 
-  // ⭐ 다운로드 함수 상태 (StudentQrCode에서 전달받음)
   const [downloadFn, setDownloadFn] = useState<(() => Promise<void>) | null>(null)
 
-  // 다운로드 준비 완료 핸들러
   const handleDownloadReady = useCallback((fn: () => Promise<void>) => {
     setDownloadFn(() => fn)
   }, [])
 
-  // 다운로드 버튼 클릭 핸들러
   const handleDownload = useCallback(async () => {
     if (downloadFn) {
       await downloadFn()
     }
   }, [downloadFn])
 
-  // 학생 정보 (student_number) 조회
-  const { data: studentInfo } = useQuery({
-    queryKey: ['student-info', studentId],
-    queryFn: async () => {
-      if (!studentId) return null
-      return { student_number: '00000' }
-    },
-    enabled: !!studentId,
-  })
-
-  // QR 코드 조회
   const {
     data: qrCode,
     isLoading: codeLoading,
-    isFetching: codeRefetching,
     error: codeError,
-    refetch: refetchQrCode,
   } = useStudentQrCode(studentId ?? undefined)
 
-  // QR 코드 생성/조회
-  const generateQrCode = useGenerateQrCode({
-    onSuccess: () => {
-      console.log('[QR] QR 코드 생성/조회 성공')
-    },
-    onError: (error: Error) => {
-      console.error('[QR] QR 코드 생성 실패:', error)
-      toast.error('QR 코드 조회 실패. 새로고침 버튼을 눌러 다시 시도하거나 관리자에게 문의하세요.')
-    },
-  })
-
-  // QR 코드 자동 생성 시도 추적 (무한 루프 방지)
-  const generationAttemptedRef = useRef(false)
-
-  // studentId 변경 시 생성 시도 상태 리셋 (다른 학생으로 전환 시)
-  useEffect(() => {
-    generationAttemptedRef.current = false
-  }, [studentId])
-
-  // QR 코드가 없으면 자동 생성 시도 (1회)
-  useEffect(() => {
-    // 이미 생성 시도한 경우 재시도 방지
-    if (generationAttemptedRef.current) return
-    if (!studentId || codeLoading || generateQrCode.isPending) return
-
-    if (qrCode) {
-      console.log('[QR] QR 코드 로드 완료')
-      return
-    }
-
-    // QR 코드가 없으면 생성 시도 (1회만)
-    generationAttemptedRef.current = true
-    console.log('[QR] QR 코드 생성 시도')
-    generateQrCode.mutate(studentId)
-  }, [studentId, codeLoading, qrCode, generateQrCode.isPending])
+  const generateQrCode = useGenerateQrCode()
 
   const handleBack = () => {
     router.back()
   }
 
   const handleRefresh = () => {
-    if (studentId) {
-      console.log('[QR] 수동 새로고침')
-      refetchQrCode()
-    }
+    // Mock에서는 데이터가 항상 존재하므로 알림만 표시
+    alert('QR 코드를 갱신했습니다! (데모)')
   }
 
   const isLoading = profileLoading || codeLoading || generateQrCode.isPending
-  const error = codeError?.message || (generateQrCode.error instanceof Error ? generateQrCode.error.message : null) || null
+  const error = codeError
 
   return (
-    <div className="min-h-dvh bg-[#6866F1] flex flex-col">
+    <motion.div 
+      className="min-h-dvh flex flex-col relative overflow-hidden bg-black"
+    >
+      {/* Sunray Background Overlay (Cyan/Blue Tinted) */}
+      <div className="sunray-bg pointer-events-none opacity-50 scale-150 grayscale sepia hue-rotate-180" />
+
+      {/* Laser Beam Overlays */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={i}
+          animate={{ 
+              x: [-1000, 1500], 
+              opacity: [0, 0.8, 0],
+              backgroundColor: ['#00ffff', '#ff00ff', '#00ffff']
+          }}
+          transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.3 }}
+          className="absolute h-2 w-full blur-md z-0"
+          style={{ top: `${15 + i * 15}%`, rotate: i % 2 === 0 ? '30deg' : '-30deg' } as any}
+        />
+      ))}
+
+      {/* Floating Kitsch Emojis */}
+      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{ 
+              y: [1000, -200], 
+              x: [Math.random() * 400, Math.random() * 400],
+              rotate: [0, 360] 
+            }}
+            transition={{ duration: 4 + Math.random() * 4, repeat: Infinity, ease: 'linear' }}
+            className="absolute text-4xl opacity-40"
+          >
+            {['💎', '✨', '🛰️', '👨‍🎤', '🔦'][i % 5]}
+          </motion.div>
+        ))}
+      </div>
+
       <div className="h-safe-top shrink-0" />
 
+      {/* Marquee Security Banner */}
+      <div className="bg-cyan-400 py-2 border-y-4 border-black relative z-20">
+         <motion.div 
+            animate={{ x: [800, -1200] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            className="whitespace-nowrap font-black text-black italic text-sm flex gap-10"
+         >
+            <span>🚨 [SECURITY ALERT] ZUDO CYBER TROUT SYSTEM ACTIVE 🚨</span>
+            <span>🔐 [인증 대기 중] 조속히 스캐너에 신분증을 제시하십시오! 🔐</span>
+            <span>✨ [신분 확인] 당신의 전생은 전설의 트로트 가수였습니다 ✨</span>
+         </motion.div>
+      </div>
+
       {/* 헤더 */}
-      <header className="flex items-center justify-between px-4 py-3">
-        <div className="flex items-center gap-3">
+      <header className="flex items-center justify-between px-4 py-6 relative z-30 bg-black/80 backdrop-blur-xl border-b-8 border-cyan-400 shadow-2xl">
+        <div className="flex items-center gap-4">
           <button
             onClick={handleBack}
-            className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors"
-            aria-label="뒤로가기"
+            className="p-3 rounded-full bg-cyan-400 text-black border-2 border-white shadow-lg active:scale-90"
           >
-            <ArrowLeft className="w-6 h-6 text-white" />
+            <ArrowLeft className="w-8 h-8 font-bold" />
           </button>
           <div>
-            <h1 className="text-lg font-bold text-white">QR 스캔</h1>
+            <h1 className="text-3xl font-black text-white italic tracking-tighter [text-shadow:4px_4px_0_#00ffff] uppercase">
+                사이버 스캔
+            </h1>
             {profile?.full_name && (
-              <p className="text-sm text-white/80">{profile.full_name}</p>
+              <p className="text-[10px] font-black text-cyan-400 uppercase tracking-widest animate-pulse border-t border-cyan-900 mt-1">
+                ACCESS GRANTED: {profile.full_name} 👨‍🎤
+              </p>
             )}
           </div>
         </div>
 
-        {/* 새로고침 버튼 */}
         <button
           onClick={handleRefresh}
-          disabled={isLoading || !studentId}
-          className="p-2 rounded-full hover:bg-white/10 transition-colors disabled:opacity-50"
-          aria-label="새로고침"
+          className="w-14 h-14 flex items-center justify-center rounded-full bg-black border-4 border-cyan-400 shadow-[0_0_20px_#00ffff] active:rotate-180 transition-all duration-500"
         >
-          <RefreshCw className={`w-5 h-5 text-white ${(codeRefetching || generateQrCode.isPending) ? 'animate-spin' : ''}`} />
+          <span className="text-3xl animate-spin">🔄</span>
         </button>
       </header>
 
       {/* 메인 컨텐츠 */}
-      <div className="flex-1 flex flex-col items-center justify-center px-3 py-4 pb-safe">
-        {!studentId && !profileLoading ? (
-          <div className="text-center text-muted-foreground">
-            <p>학생 정보를 찾을 수 없습니다.</p>
-            <p className="text-sm mt-2">관리자에게 문의하세요.</p>
-          </div>
-        ) : (
-          <StudentQrCode
-            studentId={studentId || ''}
-            qrCode={qrCode ?? null}
-            studentName={profile?.full_name || undefined}
-            studentNumber={studentInfo?.student_number}
-            isLoading={isLoading}
-            error={error}
-            onRefresh={handleRefresh}
-            onDownloadReady={handleDownloadReady}
+      <div className="flex-1 flex flex-col items-center justify-center px-3 py-10 pb-safe relative z-20">
+        <div className="relative p-10">
+          {/* Scanning Box Effect */}
+          <motion.div 
+            animate={{ 
+              boxShadow: [
+                '0 0 50px #00ffff, inset 0 0 50px #00ffff',
+                '0 0 100px #ff00ff, inset 0 0 100px #ff00ff',
+                '0 0 50px #00ffff, inset 0 0 50px #00ffff'
+              ],
+              scale: [1, 1.05, 1]
+            }}
+            transition={{ duration: 1, repeat: Infinity }}
+            className="absolute inset-0 border-8 border-white rounded-[3rem]"
           />
-        )}
+          
+          <div className="bg-white p-6 rounded-[2rem] shadow-inner relative overflow-hidden border-4 border-black">
+            <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/20 to-transparent pointer-events-none" />
+            <AnimatePresence mode="wait">
+              {!studentId && !profileLoading ? (
+                <div className="text-center p-12 font-black text-red-600 bg-black/5 rounded-3xl">
+                  <span className="text-6xl mx-auto mb-4 animate-bounce block">🛡️</span>
+                  <p className="text-2xl italic">[ERROR] 인증 불가</p>
+                </div>
+              ) : (
+                <StudentQrCode
+                  studentId={studentId || ''}
+                  qrCode={qrCode ?? null}
+                  studentName={profile?.full_name || undefined}
+                  studentNumber={mockStudentInfo.student_number}
+                  isLoading={isLoading}
+                  error={error}
+                  onRefresh={handleRefresh}
+                  onDownloadReady={handleDownloadReady}
+                />
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
 
         {/* QR 코드 다운로드 버튼 */}
-        {downloadFn && !isLoading && !error && qrCode && (
-          <button
-            onClick={handleDownload}
-            className="mt-8 px-6 py-3 bg-white/20 hover:bg-white/30 active:bg-white/40
-                       rounded-xl text-white font-medium transition-colors
-                       flex items-center gap-2"
-          >
-            <Download className="w-5 h-5" />
-            QR 코드 다운로드
-          </button>
-        )}
+        <AnimatePresence>
+          {downloadFn && !isLoading && qrCode && (
+            <motion.button
+              initial={{ scale: 0, rotate: -45 }}
+              animate={{ scale: 1, rotate: 0 }}
+              whileHover={{ scale: 1.2, rotate: [0, 5, -5, 0] }}
+              onClick={handleDownload}
+              className="mt-16 px-12 py-6 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-black font-black text-3xl 
+                         rounded-full shadow-[0_15px_0_#1e3a8a] border-4 border-white
+                         flex items-center gap-4 transition-all active:translate-y-2 active:shadow-none"
+            >
+              <Download className="w-10 h-10 animate-bounce" />
+              QR 코드 납치! 🚀
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
-    </div>
+
+      <div className="fixed bottom-6 left-0 w-full text-center pointer-events-none opacity-40 z-30">
+        <p className="text-[10px] font-black text-white tracking-[0.5em] bg-black/20 backdrop-blur-sm inline-block px-4 py-1 rounded-full border border-white/20 uppercase">
+            Zudo Cyber Security Protocol v8.0 Hardened Edition
+        </p>
+      </div>
+    </motion.div>
   )
 }

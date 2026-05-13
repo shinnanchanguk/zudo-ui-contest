@@ -216,29 +216,41 @@ export function MobileChatView({ onBack }: MobileChatViewProps) {
       />
 
       {/* Header */}
-      <div className="shrink-0 flex h-14 items-center justify-between border-b px-4 bg-white">
+      <div className="shrink-0 flex h-20 items-center justify-between border-b-8 border-pink-500 px-4 bg-black text-white shadow-2xl relative z-30">
         <div className="flex items-center gap-3 min-w-0">
-          <button onClick={onBack} className="p-2 -ml-2 hover:bg-gray-100 rounded-full">
-            <ArrowLeft className="w-5 h-5 text-gray-900" />
+          <button 
+            onClick={onBack} 
+            className="p-3 bg-pink-600 rounded-full border-2 border-white shadow-lg active:scale-90"
+          >
+            <ArrowLeft className="w-8 h-8 text-white" />
           </button>
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-100">
-            <Hash className="w-5 h-5 text-[#6866F1]" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 border-2 border-white animate-pulse">
+            <span className="text-2xl">💝</span>
           </div>
-          <div className="min-w-0 flex items-center">
-            <h2 className="text-sm font-semibold text-gray-900 truncate">
-              {studentChannel.name}
+          <div className="min-w-0 flex flex-col">
+            <h2 className="text-2xl font-black italic text-white [text-shadow:3px_3px_0_#ff00ff] truncate">
+              사랑방 대화
             </h2>
+            <p className="text-[10px] font-bold text-pink-300 uppercase tracking-widest">
+              ZUDO FAN CLUB BOARD
+            </p>
           </div>
         </div>
-        <button className="h-8 w-8 flex items-center justify-center hover:bg-gray-100 rounded-md">
-          <MoreVertical className="h-4 w-4 text-gray-500" />
-        </button>
+        <div className="flex gap-2">
+            <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                className="text-2xl"
+            >
+                ✨
+            </motion.div>
+        </div>
       </div>
 
       {/* Messages */}
       <div
         ref={messagesContainerRef}
-        className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-2"
+        className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-6 bg-transparent"
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {!messages || messages.length === 0 ? (

@@ -14,7 +14,7 @@ export function useMyReports() {
 
 export function useSubmitSafetyReport() {
   return {
-    mutateAsync: async () => {
+    mutateAsync: async (_data: any) => {
       toast.success('안전 제보가 접수되었습니다. (데모)')
       return { success: true }
     },

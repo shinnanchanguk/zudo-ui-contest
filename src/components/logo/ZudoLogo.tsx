@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { motion } from 'framer-motion'
 
 interface ZudoLogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'mobile'
@@ -58,9 +59,16 @@ export function ZudoLogo({ size = 'md', className, rounded = 'top' }: ZudoLogoPr
   const roundedClass = roundedConfig[rounded]
 
   return (
-    <div
+    <motion.div
+      animate={{
+        backgroundColor: ['#6866F1', '#ff0000', '#00ff00', '#6866F1'],
+      }}
+      transition={{
+        duration: 2,
+        repeat: Infinity,
+      }}
       className={cn(
-        'flex items-center justify-center bg-[#6866F1] overflow-hidden',
+        'flex items-center justify-center overflow-hidden border-4 border-yellow-400',
         config.container,
         roundedClass,
         className
@@ -87,10 +95,20 @@ export function ZudoLogo({ size = 'md', className, rounded = 'top' }: ZudoLogoPr
           ))}
         </div>
         {/* ZUDO text */}
-        <span className={cn('font-[family-name:var(--font-impact)] font-normal text-white relative z-10', config.text)}>
+        <motion.span 
+          animate={{
+            scale: [1, 1.1, 1],
+            color: ['#ffffff', '#ffff00', '#00ffff', '#ffffff']
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+          }}
+          className={cn('font-[family-name:var(--font-impact)] font-normal text-white relative z-10', config.text)}
+        >
           ZUDO
-        </span>
+        </motion.span>
       </div>
-    </div>
+    </motion.div>
   )
 }
