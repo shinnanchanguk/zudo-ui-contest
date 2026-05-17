@@ -1,4 +1,5 @@
 export const REPO = 'shinnanchanguk/zudo-ui-contest'
+const REPO_OWNER = REPO.split('/')[0]
 
 export type Submission = {
   number: number
@@ -61,7 +62,8 @@ export async function fetchSubmissions(): Promise<Submission[]> {
           if (Array.isArray(comments)) {
             for (let i = comments.length - 1; i >= 0; i--) {
               const c = comments[i]
-              if (c?.user?.login !== 'vercel[bot]') continue
+              const login = c?.user?.login
+              if (login !== 'vercel[bot]' && login !== REPO_OWNER) continue
               const m = c.body?.match(PREVIEW_URL_PATTERN)
               if (m) {
                 previewUrl = m[0]
