@@ -273,7 +273,7 @@ export function AfterschoolRequestView({ onClose }: AfterschoolRequestViewProps)
     // 내 신청 프로그램 (그리드용)
     const myApplicationPrograms = useMemo(() => {
         return myApplications
-            .filter((app): app is typeof app & { class: NonNullable<typeof app.class> } => app.class !== null)
+            .filter((app): app is typeof app & { class: NonNullable<typeof app.class> } => app.class != null)
             .map(app => {
                 // transformProgram과 동일한 변환 적용
                 const classData = app.class

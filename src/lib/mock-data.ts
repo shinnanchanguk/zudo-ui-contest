@@ -10,6 +10,7 @@
 // ============================================
 export const mockProfile = {
   id: 'mock-student-001',
+  student_id: 'mock-student-001',
   full_name: '학생A',
   role: 'student' as const,
   avatar_url: null,
@@ -155,6 +156,10 @@ export const mockPillSummary = {
   net_pills: 9,
   merit_count: 5,
   demerit_count: 2,
+  current_rank: 42,
+  total_students: 450,
+  has_pill_today: true,
+  today_pill_type: 'merit' as const,
   last_updated: '2026-04-14T08:00:00+09:00',
 }
 

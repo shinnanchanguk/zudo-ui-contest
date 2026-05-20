@@ -264,6 +264,12 @@
 }
 
 @layer base {
+  html, body {
+    @apply overscroll-y-none;
+    /* Prevent default browser pull-to-refresh */
+    overscroll-behavior-y: none;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
@@ -277,24 +283,59 @@
 
 /* 수직 슬라이드 (다중 메시지 전환) */
 @keyframes slide-up {
-  0% { transform: translateY(100%); opacity: 0; }
-  10% { transform: translateY(0); opacity: 1; }
-  85% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-100%); opacity: 0; }
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  10% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  85% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 }
 
 /* 수평 슬라이드 (다중 메시지 전환) */
 @keyframes slide-left {
-  0% { transform: translateX(100%); opacity: 0; }
-  10% { transform: translateX(0); opacity: 1; }
-  85% { transform: translateX(0); opacity: 1; }
-  100% { transform: translateX(-100%); opacity: 0; }
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  10% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  85% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
 }
 
 /* 마키 스크롤 (단일 메시지) */
 @keyframes marquee {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .animate-slide-up {
@@ -313,6 +354,7 @@
 
 /* 접근성: 모션 감소 설정 */
 @media (prefers-reduced-motion: reduce) {
+
   .animate-slide-up,
   .animate-slide-left,
   .animate-marquee {
@@ -322,13 +364,23 @@
 
 /* Accordion animations */
 @keyframes accordion-down {
-  from { height: 0; }
-  to { height: var(--radix-accordion-content-height); }
+  from {
+    height: 0;
+  }
+
+  to {
+    height: var(--radix-accordion-content-height);
+  }
 }
 
 @keyframes accordion-up {
-  from { height: var(--radix-accordion-content-height); }
-  to { height: 0; }
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+
+  to {
+    height: 0;
+  }
 }
 
 .animate-accordion-down {
@@ -344,15 +396,19 @@
   .pt-safe {
     padding-top: env(safe-area-inset-top);
   }
+
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
   }
+
   .h-safe-top {
     height: env(safe-area-inset-top);
   }
+
   .h-safe-bottom {
     height: env(safe-area-inset-bottom);
   }
+
   .min-h-safe-screen {
     min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   }
@@ -403,6 +459,7 @@
 
 /* Print Styles */
 @media print {
+
   /* Hide navigation and non-printable elements */
   .no-print,
   nav,
@@ -447,7 +504,8 @@
     width: 100%;
   }
 
-  th, td {
+  th,
+  td {
     border: 1px solid #333;
     padding: 4px 8px;
   }
@@ -465,4 +523,59 @@
     width: 100% !important;
     max-width: none !important;
   }
+}
+
+/* ============================================
+   Liquid Glass & Background Blobs
+   ============================================ */
+
+@keyframes blob-float {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob-float 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card {
+  @apply bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-xl;
+}
+
+.liquid-bg {
+  @apply fixed inset-0 overflow-hidden -z-10 bg-[#f8fafc] dark:bg-[#0f172a];
+}
+
+.blob {
+  @apply absolute rounded-full blur-[80px] opacity-40 mix-blend-multiply dark:mix-blend-soft-light;
+}
+
+/* Skeleton Loading Shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }

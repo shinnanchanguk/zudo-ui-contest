@@ -2,6 +2,7 @@
 'use client'
 
 import { Loader2, Pill, Sigma } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { usePillSummary, useStudentPillRecords } from '@/hooks/usePill'
 import { useProfile } from '@/hooks/useAuth'
 
@@ -40,34 +41,64 @@ export function PillsView() {
 
   return (
     <div className="p-5 pb-safe space-y-6">
+      {/* 순위 정보 */}
+      <div className="glass-card rounded-2xl p-6 flex items-center justify-between overflow-hidden relative group">
+        <div className="absolute inset-0 bg-indigo-500/5 group-hover:bg-indigo-500/10 transition-colors" />
+        <div className="relative">
+          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">현재 순위</p>
+          <p className="text-3xl font-extrabold text-gray-900 dark:text-white mt-1">
+            {summary?.current_rank ?? '-'}<span className="text-lg font-bold text-gray-400 ml-1">위</span>
+          </p>
+        </div>
+        <div className="relative text-right">
+          <p className="text-xs text-gray-400">전체 {summary?.total_students ?? '-'}명 중</p>
+          <div className="w-24 h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full mt-2 overflow-hidden">
+            <motion.div 
+              initial={{ width: 0 }}
+              animate={{ width: summary?.total_students ? `${((summary.total_students - summary.current_rank) / summary.total_students) * 100}%` : 0 }}
+              className="h-full bg-indigo-500"
+            />
+          </div>
+        </div>
+      </div>
+
       {/* 요약 섹션 - 3열 그리드 */}
       <div className="grid grid-cols-3 gap-3">
         {/* 초록 알약 (상점) */}
-        <div
-          className="rounded-2xl p-4 flex flex-col items-center justify-center gap-2"
-          style={{ backgroundColor: '#2E5C5A' }}
+        <motion.div
+          whileHover={{ y: -5 }}
+          className="glass-card rounded-2xl p-4 flex flex-col items-center justify-center gap-2 border-green-500/10"
         >
-          <Pill className="w-8 h-8 text-white" />
-          <p className="text-3xl font-bold text-white">{meritTotal}</p>
-        </div>
+          <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center shadow-lg shadow-green-200">
+            <Pill className="w-5 h-5 text-white" />
+          </div>
+          <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{meritTotal}</p>
+          <span className="text-[10px] font-bold text-green-600">초록 알약</span>
+        </motion.div>
 
         {/* 빨간 알약 (벌점) */}
-        <div
-          className="rounded-2xl p-4 flex flex-col items-center justify-center gap-2"
-          style={{ backgroundColor: '#9B2226' }}
+        <motion.div
+          whileHover={{ y: -5 }}
+          className="glass-card rounded-2xl p-4 flex flex-col items-center justify-center gap-2 border-red-500/10"
         >
-          <Pill className="w-8 h-8 text-white" />
-          <p className="text-3xl font-bold text-white">{demeritTotal}</p>
-        </div>
+          <div className="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center shadow-lg shadow-red-200">
+            <Pill className="w-5 h-5 text-white" />
+          </div>
+          <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{demeritTotal}</p>
+          <span className="text-[10px] font-bold text-red-600">붉은 알약</span>
+        </motion.div>
 
         {/* 알짜 알약 (합계) */}
-        <div
-          className="rounded-2xl p-4 flex flex-col items-center justify-center gap-2"
-          style={{ backgroundColor: '#E9D8A6' }}
+        <motion.div
+          whileHover={{ y: -5 }}
+          className="glass-card rounded-2xl p-4 flex flex-col items-center justify-center gap-2 border-amber-500/10"
         >
-          <Sigma className="w-8 h-8 text-gray-800" />
-          <p className="text-3xl font-bold text-gray-800">{netTotal}</p>
-        </div>
+          <div className="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center shadow-lg shadow-amber-100">
+            <Sigma className="w-5 h-5 text-white" />
+          </div>
+          <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{netTotal}</p>
+          <span className="text-[10px] font-bold text-amber-600">알짜 점수</span>
+        </motion.div>
       </div>
 
       {/* 구분선 */}

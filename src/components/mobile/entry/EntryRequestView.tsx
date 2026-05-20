@@ -139,21 +139,21 @@ export function EntryRequestView({ onClose }: EntryRequestViewProps) {
 
       {/* 월별 현황 표시 */}
       <div className="mb-6">
-        <div className="bg-indigo-50 rounded-2xl p-4">
+        <div className="glass-card rounded-2xl p-4 bg-indigo-500/5 border-indigo-500/10">
           <p className="text-xs text-indigo-600 font-bold mb-2">이번 달 조기입실 현황</p>
           <div className="flex items-center gap-3">
             {/* 프로그레스 바 */}
-            <div className="flex-1 h-2 bg-indigo-100 rounded-full overflow-hidden">
+            <div className="flex-1 h-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#6866F1] rounded-full transition-all duration-300"
+                className="h-full bg-indigo-600 rounded-full transition-all duration-300"
                 style={{ width: `${Math.min(100, (monthlyCount / Math.max(effectiveAutoApprovalLimit || 4, 1)) * 100)}%` }}
               />
             </div>
-            <span className="text-sm font-bold text-gray-900">
+            <span className="text-sm font-bold text-gray-900 dark:text-white">
               {monthlyCount}/{effectiveAutoApprovalLimit || 4}회
             </span>
           </div>
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
             {remainingFreeEntries > 0
               ? `자동 승인 ${remainingFreeEntries}회 남음`
               : '자동 승인 횟수를 모두 사용했습니다'}
@@ -166,27 +166,27 @@ export function EntryRequestView({ onClose }: EntryRequestViewProps) {
         {/* Idle 상태 */}
         {step === 'idle' && (
           <>
-            <div className="w-32 h-32 bg-indigo-100 rounded-full flex items-center justify-center mb-6">
-              <LogIn className="w-12 h-12 text-[#6866F1]" />
+            <div className="w-32 h-32 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mb-6">
+              <LogIn className="w-12 h-12 text-indigo-600" />
             </div>
-            <h3 className="text-lg font-bold mb-6">조기입실 신청</h3>
+            <h3 className="text-lg font-bold mb-6 text-gray-900 dark:text-white">조기입실 신청</h3>
 
-            <div className="bg-indigo-50 rounded-2xl p-5 mb-8 border border-indigo-100 space-y-3 text-left">
+            <div className="glass-card rounded-2xl p-5 mb-8 border border-indigo-500/10 space-y-3 text-left">
               <div className="flex gap-3">
-                <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-[#6866F1] text-white text-xs font-bold">
+                <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-indigo-600 text-white text-[10px] font-bold">
                   1
                 </span>
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  예를 들어, 학기 초부터 시험 기간 2주 전까지의 기간이 <span className="font-bold text-indigo-700">N주</span>라면, 그 기간에 총 <span className="font-bold text-indigo-700">N번</span>의 조기입실이 가능합니다.
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  예를 들어, 학기 초부터 시험 기간 2주 전까지의 기간이 <span className="font-bold text-indigo-600">N주</span>라면, 그 기간에 총 <span className="font-bold text-indigo-600">N번</span>의 조기입실이 가능합니다.
                 </p>
               </div>
 
               <div className="flex gap-3">
-                <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-[#6866F1] text-white text-xs font-bold">
+                <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-indigo-600 text-white text-[10px] font-bold">
                   2
                 </span>
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  <span className="font-bold text-orange-700">N번을 초과</span>하여 조기 입실을 신청한 경우 학부모에게 알림이 가고, 사감팀장 승인 후에 조기입실이 가능합니다.
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  <span className="font-bold text-orange-600">N번을 초과</span>하여 조기 입실을 신청한 경우 학부모에게 알림이 가고, 사감팀장 승인 후에 조기입실이 가능합니다.
                 </p>
               </div>
             </div>
@@ -199,7 +199,7 @@ export function EntryRequestView({ onClose }: EntryRequestViewProps) {
             <button
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className="w-full bg-[#6866F1] text-white py-4 rounded-xl font-bold shadow-lg shadow-indigo-200 active:scale-95 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-indigo-200 active:scale-95 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
             >
               조기입실 신청
             </button>

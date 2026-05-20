@@ -16,7 +16,7 @@ export function useStudentEntry() {
     freeEntryCutoffTime: '18:00',
 
     monthlyCount: 2,
-    todayEntry: null,
+    todayEntry: null as any,
     canAutoApprove: true,
     remainingFreeEntries: 3,
 

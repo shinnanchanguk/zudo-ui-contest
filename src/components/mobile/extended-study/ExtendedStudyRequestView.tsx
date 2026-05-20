@@ -100,13 +100,13 @@ export function ExtendedStudyRequestView({ onClose }: ExtendedStudyRequestViewPr
     <div className="h-full flex flex-col">
       {/* 연장학습 기간 정보 */}
       <div className="mb-6">
-        <div className="bg-pink-50 rounded-2xl p-4">
-          <p className="text-xs text-pink-600 font-bold mb-2">연장학습 기간</p>
-          <p className="text-sm font-bold text-gray-900 mb-1">
+        <div className="glass-card rounded-2xl p-4 bg-indigo-500/5 border-indigo-500/10">
+          <p className="text-xs text-indigo-600 font-bold mb-2">연장학습 기간</p>
+          <p className="text-sm font-bold text-gray-900 dark:text-white mb-1">
             {activePeriod?.name || '연장학습'}
           </p>
           {activePeriod && (
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-500 dark:text-gray-400">
               {formatExtendedStudyPeriodRange(
                 activePeriod.study_start_date,
                 activePeriod.study_end_date
@@ -189,10 +189,10 @@ export function ExtendedStudyRequestView({ onClose }: ExtendedStudyRequestViewPr
             {/* 미등록 상태 */}
             {!status?.is_registered && (
               <>
-                <div className="w-32 h-32 bg-pink-100 rounded-full flex items-center justify-center mb-6">
-                  <BookOpen className="w-12 h-12 text-pink-600" />
+                <div className="w-32 h-32 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mb-6">
+                  <BookOpen className="w-12 h-12 text-indigo-600" />
                 </div>
-                <h3 className="text-lg font-bold mb-2">연장학습 신청</h3>
+                <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">연장학습 신청</h3>
                 <p className="text-gray-500 text-sm mb-8">
                   오늘 연장학습을 신청합니다.
                   <br />
@@ -201,7 +201,7 @@ export function ExtendedStudyRequestView({ onClose }: ExtendedStudyRequestViewPr
                 <button
                   onClick={handleSubmit}
                   disabled={!canSubmit || isSubmitting}
-                  className="w-full bg-pink-500 text-white py-4 rounded-xl font-bold shadow-lg shadow-pink-200 active:scale-95 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-indigo-200 active:scale-95 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   연장학습 신청하기
                 </button>
